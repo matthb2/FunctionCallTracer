@@ -1,0 +1,16 @@
+This tool can be used to display which functions are called in a complex program. 
+
+Public Domain license with the extra stipulation that the author is not held liable for any results of this software's usage. 
+
+Usage:
+
+gcc -O0 -g -finstrument-functions my_code.c trace.c
+
+./a.out 2>&1 > log
+
+grep "funcall" log > log2 #strip your program's actual output
+
+ruby pflog.rb log2 | c++filt -n | sort -u | less #show unique functions
+
+
+WARNING: this is a quick hack -- use at your own risk!
